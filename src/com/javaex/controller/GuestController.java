@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.javaex.dao.GuestbookDao;
+import com.javaex.util.WebUtil;
 import com.javaex.vo.GuestbookVo;
 
 @WebServlet("/gcr")
@@ -43,8 +44,11 @@ public class GuestController extends HttpServlet {
 			request.setAttribute("gList", guestList);
 
 			// 데이터 + html
+			WebUtil.forward(request, response, "/WEB-INF/addList.jsp");
+			/*
 			RequestDispatcher rd = request.getRequestDispatcher("/addList.jsp");
 			rd.forward(request, response);
+			*/
 		} else if ("add".equals(action)) {
 
 			// 파라미터에서 값 꺼내기(name, password, content)
@@ -59,13 +63,17 @@ public class GuestController extends HttpServlet {
 			GuestbookDao guestbookDao = new GuestbookDao();
 			guestbookDao.addGuest(guestbookVo);
 
-			response.sendRedirect("/guestbook2/gcr?action=addList");
+			WebUtil.redirect(request, response,  "/WEB-INF/addList.jsp");
+			
+			//response.sendRedirect("/guestbook2/gcr?action=addList");
 
 		} else if ("deleteForm".equals(action)) {
 
+			WebUtil.forward(request, response, "/WEB-INF/deleteForm.jsp");
+			/*
 			RequestDispatcher rd = request.getRequestDispatcher("/deleteForm.jsp");
 			rd.forward(request, response);
-
+			 */
 		} else if ("delete".equals(action)) {
 
 			int no = Integer.parseInt(request.getParameter("no"));
@@ -76,9 +84,9 @@ public class GuestController extends HttpServlet {
 
 			if (password.equals(oraclepassword)) {
 				guestbookDao.guestDelete(no);
-				response.sendRedirect("/guestbook2/gcr?action=addList");
+				WebUtil.redirect(request, response,  "/WEB-INF/addList.jsp");
 			} else {
-				response.sendRedirect("/guestbook2/gcr?action=addList");
+				WebUtil.redirect(request, response,  "/WEB-INF/addList.jsp");
 			}
 		}
 	}
