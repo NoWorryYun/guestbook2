@@ -63,7 +63,7 @@ public class GuestController extends HttpServlet {
 			GuestbookDao guestbookDao = new GuestbookDao();
 			guestbookDao.addGuest(guestbookVo);
 
-			WebUtil.redirect(request, response,  "/WEB-INF/addList.jsp");
+			WebUtil.redirect(request, response, "./gcr?action=addList");
 			
 			//response.sendRedirect("/guestbook2/gcr?action=addList");
 
@@ -73,7 +73,7 @@ public class GuestController extends HttpServlet {
 			/*
 			RequestDispatcher rd = request.getRequestDispatcher("/deleteForm.jsp");
 			rd.forward(request, response);
-			 */
+			*/
 		} else if ("delete".equals(action)) {
 
 			int no = Integer.parseInt(request.getParameter("no"));
@@ -84,9 +84,9 @@ public class GuestController extends HttpServlet {
 
 			if (password.equals(oraclepassword)) {
 				guestbookDao.guestDelete(no);
-				WebUtil.redirect(request, response,  "/WEB-INF/addList.jsp");
+				WebUtil.redirect(request, response, "./gcr?action=addList");
 			} else {
-				WebUtil.redirect(request, response,  "/WEB-INF/addList.jsp");
+				WebUtil.redirect(request, response, "./gcr?action=addList");
 			}
 		}
 	}
