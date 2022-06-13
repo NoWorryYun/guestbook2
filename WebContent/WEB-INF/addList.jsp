@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.javaex.dao.GuestbookDao"%>
+<%@ page import="com.javaex.dao.UserDao"%>
 <%@ page import="com.javaex.vo.GuestbookVo"%>
 <%@ page import="java.util.List"%>
 
 <%
-	GuestbookDao guestbookDao = new GuestbookDao();
+UserDao guestbookDao = new UserDao();
 	List<GuestbookVo> guestList = (List<GuestbookVo>)request.getAttribute("gList");
-	
 %>
 
 
